@@ -1,34 +1,34 @@
-#Yammer Anywhere In Salesforce.com
-##Why? 
+# Yammer Anywhere In Salesforce.com
+## Why? 
 
 Want to integrate Yammer and Salesforce.com? Yammer has developed a JavaScript SDK which allows you to easily integrate any Yammer feed to Salesforce with very few lines of code. This is ideal for any company looking to make their internal software more tightly integrated.
 
-##Yammer And Chatter 
+## Yammer And Chatter 
 Yammer is built around the idea of users, groups, and feeds. A user belongs to many groups, which have their own individual feeds. Everyone belongs to the 'All Company' group by default. Our example Yammer domain has Sales, Marketing, Accounting, and Engineering groups.
 
 Salesforce (with Chatter) is composed of users, objects (fancy tables), records, and feeds. Salesforce specializes in CRM data, and with Chatter, everything is related to a set of data or specific record. There is another layer of granularity with Chatter because it is forced to reference CRM data. Chatter dictates the need for Salesforce, which isn't always the best tool for everyone in your organization.
 
 Yammer can be the social layer regardless of your CRM solution.
 
-##The Story
+## The Story
 + Bill Nye, Science Guy, has customers and partners. From Salesforce, Bill wants to check with his accountants (who use only Yammer) to ensure that Neil Tyson received the invoice. He messages Ken Gene in the accounting department, "Hey Ken, when did we send out the invoice to Neil?"
 + Ken answers from Yammer, "Let me check"
 	+ "He downloaded the invoice in March"
 
-####In Salesforce:
+#### In Salesforce:
 
 ![yammer conversation](img/yammer_story_account_sfdc.png?raw=true)
 
-##Guide For Setup
+## Guide For Setup
 
-###Yammer Sign Up
+### Yammer Sign Up
 The first thing you need to start is a [Yammer domain](https://www.yammer.com/?return_home=true). We'll assume you already have this setup since you are still reading, so let's get started.
 + Login to your Yammer domain
 + Create a group - Use 'Accounting' as an example (reference this group later)
 
 ![sht1](img/ScreenShot1.png?raw=true)
 
-####Create A Yammer App
+#### Create A Yammer App
 + [Guide](http://developer.yammer.com/introduction/#gs-registerapp) to getting started
 + Navigate ['by clicking this link'](https://www.yammer.com/client_applications)
 + 'Register New App'
@@ -46,19 +46,19 @@ JavaScript Origins is for CORS. [CORS](http://www.html5rocks.com/en/tutorials/co
 
 Now you're ready to create a place for your Yammer application to live in Salesforce.com.
 
-###Salesforce Sign Up
+### Salesforce Sign Up
 Create a new [salesforce instance (DE)](https://developer.salesforce.com/)
 + Option 1: Sign Up -> fill out form -> Sign me up
 + Option 2: Use your existing Salesforce.com sandbox
 
 
-####Salesforce Setup
+#### Salesforce Setup
 
 [Quick start VF page doc](http://www.salesforce.com/us/developer/docs/pages/Content/pages_quick_start_hello_world.htm)
 <br/>
 [Full VF doc](http://www.salesforce.com/us/developer/docs/pages/index.htm)
 
-#####Create Visualforce Page
+##### Create Visualforce Page
 Once logged into your new Salesforce.com org:
 + Option 1: From the Salesforce UI
 	+ Setup -> Develop -> Pages
@@ -78,7 +78,7 @@ Copy and paste this Visualforce code:
 
 Preview the page in Salesforce.com. https://SALESFORCE_DOMAIN/apex/accountyammer
 
-####Yammer Widget In Visualforce Page
+#### Yammer Widget In Visualforce Page
 [Embed API ref](https://developer.yammer.com/connect/)
 
 You now have a Visualforce page set up, so it's time to drop in your Yammer Embed widget. In the Visualforce page, include the Yammer JavaScript SDK. The `data-app-id` is the public token generated when you create your Yammer app. Find the ID through Yammer.com; Created Apps -> app_name -> Client ID.
@@ -136,7 +136,7 @@ Add the HTML for the embed widget and the JavaScript to render your feed. Get yo
 
 Your Yammer feed should now load automatically after you've logged in once through Yammer. We are setting the `use_sso` attribute because we are using the `loginButton` method to authenticate the user. If your organization is Yammer Enterprise with SSO (Single Sign-On) on your network, you can utilize this property to delegate authentication.
 
-####Configure Account Detail Override
+#### Configure Account Detail Override
 The Embed component works best with some limited context. It would be nice to see the feed while looking at an Account record in Salesforce.com. You can accomplish this with Visualforce pre-built components, specifically the ['detail' component](ref: https://www.salesforce.com/us/developer/docs/pages/Content/pages_compref_detail.htm). 
 		
 		<apex:detail subject="{!account.Id}" />
@@ -213,10 +213,10 @@ Your 'accountyammer' Visualforce page should look like this in the end:
 
 
 
-###Open Graph
+### Open Graph
 Assume you only want to show a conversation relevant to the context of a specific record in Salesforce. Open Graph allows you to capture the context of a URL in Salesforce.com. If you have an Open Graph feed on an Opportunity page, the feed will only show messages created in context of that URL. This is a great feature of the Yammer API.
 
-####Opportunity Context, Visualforce Page
+#### Opportunity Context, Visualforce Page
 Follow the same steps for 'Create Visualforce page' in the previous portion of setup.
 + Name the page 'opportunityyammer'
 + Copy/paste the visualforce code from 'accountyammer' page
@@ -237,7 +237,7 @@ A new type of feed should be present on the Opportunity page. Any message typed 
 
 ![sht1](img/ScreenShot5.png?raw=true)
 
-####Unique URLs
+#### Unique URLs
 It is important to point out, if the URL changes in any way, you won't see any information.
 To demonstrate:
 + Type and post a message in this Opportunity (Open Graph) feed
@@ -250,10 +250,10 @@ Giving context to your conversation is easy. Just change a few lines of code and
 
 The demo app is now complete. Yammer's API has a lot more to it than just the Embed widget, so be sure to check out all the documentation.
 
-##Balancing Context
+## Balancing Context
 Context awareness (with Yammer in Salesforce) requires an understanding of the Open Graph technology in the Yammer API. OG is not only for pushing 'activities' into Yammer for display in the 'Recent Activity' widget. This would be useful on its own, but the real power of Open Graph is in the feed, because it's about the conversation and maintaining the context of a conversation.
 
-##You're Done!
+## You're Done!
 We think this is a great start for anyone interested in beginning Yammer development on the Salesforce platform. Let us know if you have any questions or comments.
 
 Happy coding!
